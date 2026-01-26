@@ -41,7 +41,7 @@ def researcher_api_request(query: str, page=1) -> dict:
         url=f'https://api.clarivate.com/apis/wos-researcher/researchers?q='
             f'{urllib.parse.quote(query)}&page={page}&limit=50',
         headers={'X-APIKey': RESEARCHER_APIKEY},
-        timeout=16
+        timeout=(5, 30)
     ).json()
 
 
@@ -52,7 +52,7 @@ def researcher_api_profile_request(rid: str) -> dict:
     return requests.get(
         url=f'https://api.clarivate.com/apis/wos-researcher/researchers/{rid}',
         headers={'X-APIKey': RESEARCHER_APIKEY},
-        timeout=16
+        timeout=(5, 30)
     ).json()
 
 
@@ -64,7 +64,7 @@ def researcher_api_doc_request(rid: str, page=1) -> dict:
         url=f'https://api.clarivate.com/apis/wos-researcher/researchers/{rid}'
             f'/documents?limit=50&page={page}',
         headers={'X-APIKey': RESEARCHER_APIKEY},
-        timeout=16
+        timeout=(5, 30)
     ).json()
 
 
@@ -76,5 +76,5 @@ def peer_review_api_request(rid: str, page=1) -> dict:
         url=f'https://api.clarivate.com/apis/wos-researcher/researchers/{rid}'
             f'/peer-reviews?page={page}',
         headers={'X-APIKey': RESEARCHER_APIKEY},
-        timeout=16
+        timeout=(5, 30)
     ).json()

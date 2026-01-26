@@ -4,6 +4,7 @@ mostly data processing.
 """
 
 from datetime import date
+from collections import defaultdict
 import state
 import pandas as pd
 from api_operations import (
@@ -311,10 +312,14 @@ def fetch_full_researchers_data(json: dict) -> dict:
     pos = json['authorPosition']
     subject_categories = '; '.join(cat for cat in json['subjectCategories'])
     if json['awards']['highlyCitedResearcher']:
+        by_year = defaultdict(list)
+        for item in json['awards']['highlyCitedResearcherYear']:
+            by_year[item['year']].append(item['category'])
+
         awards = {
-            award['year']: award['category']
-            for award in json['awards']['highlyCitedResearcherYear']
-    }
+            year: ', '.join(categories)
+            for year, categories in by_year.items()
+        }
     else:
         awards = {}
 
