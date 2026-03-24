@@ -4,9 +4,9 @@ A collection of simple scripts or minimalistic applications built on Python or R
 
 Please feel free to download, modify, provide feedback, and collaborate.
 
-## [Python](/Python/)
+## [Python](/python/)
 
-## [JavaScript](/JavaScript/)
+## [JavaScript](/javaScript/)
 
 ## [R](/R/)
 
