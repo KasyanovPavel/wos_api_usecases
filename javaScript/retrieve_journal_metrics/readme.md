@@ -31,7 +31,7 @@ You might also need to install the project dependencies, which are:
 
 And launch the index.js file - wth nodemon, it's going to be a nodemon index.js terminal command. It will create a development server on http://127.0.0.1:3000 which you can open locally in any browser. This is what the start page looks like:
 
-![Start page](screenshots/start_page.png)
+![Start page](screenshots/index.png)
 
 On the webpage, you can enter a Web of Science Core Collection Advanced Search query, i.e., for an affiliation search on Clarivate for publication year of 2021-2024 (you can simply replace Clarivate with your organisation name):
 
