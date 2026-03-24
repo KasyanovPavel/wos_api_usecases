@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.png" />
+        <title>Web of Science Expanded and Journlas API - Journal Metrics Tracker</title>
+        <link rel="stylesheet" href="/css/styles.css" />
+    </head>
+
+    <body>
+        <div class="search-content-wrapper">
+            <header>
+                <h1>Web of Science Expanded and Journals API</h1>
+                <h2>Journal Metrics Tracker</h2>
+            </header>
+
+            <main>
+                <section>
+                    <form class="form" method="POST" id="search">
+                        <div class="form__header">
+                            <h3>Advanced search query builder</h3>
+                            <a href="https://webofscience.help.clarivate.com/en-us/Content/advanced-search.html"target="_blank_">Search Help</a>
+                        </div>
+
+                        <div class="switch">
+                            <label class="switch__toggle" id="toggle">
+                            <input type="checkbox" name="check" <% if (last_year) { %> checked <% } %>>
+                            <span class="slider round"></span>
+                            </label>
+                            <span class="switch__label">Retrieve the most recent journal metrics available</span>
+                        </div>
+
+                        <p>
+                            <label for="searchQuery" class="form__label"></label>
+
+                            <textarea
+                                class="form__textarea"
+                                name="searchQuery"
+                                id="searchQuery"
+                                aria-label="Search Query"
+                                placeholder='Enter or edit your query here, e.g. OG=Clarivate'><%= searchQuery || "" %></textarea>
+                        </p>
+
+                        <% if (errorMessage) { %>
+                            <p class="search__error"><%= errorMessage %></p>
+                        <% } %>
+
+                        <p>
+                            If you are not sure of how many records your search query returns, try to Validate it first.<br>
+                            Maximum number of Web of Science document records returned through the API in a single search query is 100,000.<br>
+                        
+                            <% if (message) { %>
+                                <span class="search__message"><%- message %></span>
+                            <% } %>
+
+                        </p>
+                        <button class="form__validate" type="submit" name="button" value="validate">Validate</button>
+                        <button class="form__submit" type="submit" name="button" value="run">Run</button>
+
+                        <div id="progress-container" class="progress-container">
+                            <div class="progress-bar-background">
+                                <div id="progress-bar" class="progress-bar-fill"></div>
+                                <div id="progress-label" class="progress-label"></div>
+                            </div>
+                        </div>
+
+                        <p id="download-message"></p>
+                    </form>
+                </section>
+            </main>
+        </div>
+        <div id="table-container"></div>
+        <script src="/js/main.js" charset="UTF-8"></script>
+    </body>
+</html>

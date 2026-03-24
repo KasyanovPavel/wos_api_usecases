@@ -361,4 +361,4 @@ def load_file_section_trends(file: str) -> str:
 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5002)
+    app.run(debug=True)

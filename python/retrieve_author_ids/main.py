@@ -1,29 +1,36 @@
 """
-This code allows checking any Web of Science organizational profile (or Affiliation) for author profiles that are
-associated with it - including Web of Science Distinct Author Sets, ResearcherIDs, and ORCIDs.
+This code allows checking any Web of Science organizational profile (or
+Affiliation) for author profiles that are associated with it -
+including Web of Science Distinct Author Sets, ResearcherIDs, and
+ORCIDs.
 
-To use the program, enter the organization profile name into the OUR_ORG constant value, and any additional
-Web of Science Core Collection Advanced Search parameters, like publication year, source title, subject area, etc. -
-and run the code.
+To use the program, enter the organization profile name into the
+OUR_ORG constant value, and any additional Web of Science Core
+Collection Advanced Search parameters, like publication year, source
+title, subject area, etc. - and run the code.
 
-The program generates a .csv file containing every document and every author affiliated with this organization
+The program generates a .csv file containing every document and every
+author affiliated with this organization.
 """
 
 import urllib.parse
 import requests
 from apikey import APIKEY  # Create a separate apikey.py file in the project folder to store your API key there
 
-OUR_ORG = 'Clarivate'  # Enter the organization that you would like to analyze for existing author profiles
-ADDTL_PARAMS = 'PY=2008-2022'  # Enter additional search parameters, such as publication year
+OUR_ORG = 'National University of Defense Technology - China'  # Enter the organization that you would like to analyze for existing author profiles
+ADDTL_PARAMS = 'AU=Hu Dewen*'  # Enter additional search parameters, such as publication year
 
 HEADERS = {'X-APIKey': APIKEY}
 BASEURL = "https://api.clarivate.com/api/wos"
 
 # Getting all the necessary records via API requests
-initial_response = requests.get(f'{BASEURL}?databaseId=WOS&usrQuery=OG={urllib.parse.quote(OUR_ORG)} '
-                                f'AND {ADDTL_PARAMS}&count=0&firstRecord=1', headers=HEADERS)
+initial_response = requests.get(
+    f'{BASEURL}?databaseId=WOS&usrQuery=OG={urllib.parse.quote(OUR_ORG)} '
+    f'AND {ADDTL_PARAMS}&count=0&firstRecord=1', headers=HEADERS
+)
 initial_json = initial_response.json()
-requests_required = (((initial_json['QueryResult']['RecordsFound'] - 1) // 100) + 1)
+documents_found = initial_json['QueryResult']['RecordsFound']
+requests_required = (((documents_found - 1) // 100) + 1)
 data = []
 for i in range(requests_required):
     subsequent_response = requests.get(
@@ -36,6 +43,8 @@ for i in range(requests_required):
 authors_list = []
 for wos_record in data:
     ut = wos_record['UID']
+    if ut == 'WOS:000208863900217':
+        print('Problematic Document Found!')
     # When there are 0 org affiliations in a particular WoS record - this can sometimes happen, and then there's no
     # author data that is linked to our organizational profile
     if wos_record['static_data']['fullrecord_metadata']['addresses']['count'] == 0:
@@ -338,6 +347,7 @@ for wos_record in data:
                                     for rid_record in author['data-item-ids']['data-item-id']:
                                         if rid_record['id-type'] == 'PreferredRID':
                                             author_rid = rid_record['content']
+                                            break
                                     else:
                                         author_rid = '_blank_'
                                 except (KeyError, TypeError):

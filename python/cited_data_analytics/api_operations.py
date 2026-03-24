@@ -20,7 +20,7 @@ def validate_search_query(apikey, query):
         url=f'https://api.clarivate.com/api/wos/?databaseId=WOS&usrQuery='
             f'{urllib.parse.quote(query)}&count=0&firstRecord=1',
         headers={'X-ApiKey': apikey},
-        timeout=16
+        timeout=30
     )
     if test_request.status_code == 200:
         test_json = test_request.json()
@@ -46,11 +46,8 @@ def base_record_ids_request(apikey, query_id, first_record):
         url=f'https://api.clarivate.com/api/wos/recordids/{query_id}',
         params=params,
         headers={'X-ApiKey': apikey},
-        timeout=16
+        timeout=30
     )
-
-    if response.status_code == 500:
-        return base_record_ids_request(apikey, query_id, first_record)
 
     return response
 
@@ -75,10 +72,10 @@ def cited_references_request(apikey, ut, first_record=1):
         url='https://api.clarivate.com/api/wos/references',
         params=params,
         headers={'X-ApiKey': apikey},
-        timeout=16
+        timeout=30
     )
 
-    if response.headers['x-req-reqpersec-remaining'] == 0:
+    if response.headers['x-req-reqpersec-remaining'] == 1:
         time.sleep(.2)
 
     return response
@@ -103,9 +100,13 @@ def fullrecord_request(apikey, uts):
         url='https://api.clarivate.com/api/wos/',
         params=params,
         headers={'X-ApiKey': apikey},
-        timeout=16
+        timeout=30
     )
     if response.status_code == 500:
         return fullrecord_request(apikey, uts)
+
+    if 'Data' not in response.json():
+        print(f'No data found in the following batch: {uts}, resending...')
+        response = fullrecord_request(apikey, uts)
 
     return response

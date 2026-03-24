@@ -47,7 +47,7 @@ def base_records_api_call(apikey, query, first_record=1):
         url='https://wos-api.clarivate.com/api/wos',
         params=params,
         headers={'X-ApiKey': apikey},
-        timeout=16
+        timeout=(5, 60)
     )
 
     if request.headers['x-req-reqpersec-remaining'] == 0:
@@ -75,7 +75,7 @@ def citing_records_api_call(apikey, ut, first_record=1):
         url='https://wos-api.clarivate.com/api/wos/citing/',
         params=params,
         headers={'X-ApiKey': apikey},
-        timeout=16
+        timeout=(5, 60)
     )
 
     if int(request.headers['x-req-reqpersec-remaining']) == 0:

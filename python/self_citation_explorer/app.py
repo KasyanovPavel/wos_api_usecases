@@ -109,4 +109,4 @@ def load_file_section(file):
 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5003)
+    app.run(debug=True)
