@@ -1,6 +1,6 @@
 # Web of Science Journal Metrics Tracker via Web of Science Expanded API and Journals API
 
-![Screenshot]()
+![Screenshot](/screenshots/screenshot.png)
 
 ## A JavaScript application with a simple graphical user interface that links journal publications to their respective Journal Impact Factors and Quartiles. The application retrieves the data using Web of Science Expanded and Journals API.
 
@@ -31,7 +31,7 @@ You might also need to install the project dependencies, which are:
 
 And launch the index.js file - wth nodemon, it's going to be a nodemon index.js terminal command. It will create a development server on http://127.0.0.1:3000 which you can open locally in any browser. This is what the start page looks like:
 
-![Start page](screenshots/index.png)
+![Start page](screenshots/start_page.png)
 
 On the webpage, you can enter a Web of Science Core Collection Advanced Search query, i.e., for an affiliation search on Clarivate for publication year of 2021-2024 (you can simply replace Clarivate with your organisation name):
 
@@ -44,8 +44,6 @@ You can then select whether you require the Journal Impact Factors for the publi
 The data retrieval should take some time. The retrieval process is going to be reflected on a progress bar on the same webpage. 
 
 When the data extraction is complete, the program will refresh the page and add an HTML table with the key parameters of each publication, including the Journal Impact Factor value and the best quartile for this journal. It will also save a .tsv file with this metadata retrieved into the /downloads/ subfolder of the project folder.
-
-![Screenshot](screenshots/complete.png)
 
 This application was created to demonstrate the capabilities of Web of Science APIs and custom XML data, and is not a commercial product of Clarivate. It will be reviewed and updated in the future but it will not have the same regular update frequency we normally offer for our commercial products. We do not recommend using this application as a ready-made solution as it is for reporting purposes or for supporting important grant funding decisions. We however encourage the bibliometric community to provide feedback on improving this script and to use the script as a base for more advanced analytical projects.
 
