@@ -1,6 +1,6 @@
 # Web of Science Journal Metrics Tracker via Web of Science Expanded API and Journals API
 
-![Screenshot](/screenshots/screenshot.png)
+![Screenshot](screenshots/screenshot.png)
 
 ## A JavaScript application with a simple graphical user interface that links journal publications to their respective Journal Impact Factors and Quartiles. The application retrieves the data using Web of Science Expanded and Journals API.
 
