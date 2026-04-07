@@ -16,15 +16,15 @@ body {
 }
 
 h1 {
-    font: 700 26px/1.3 'Source Sans Pro',sans-serif;
+    font: 700 26px/1.3 Source Sans Pro,sans-serif;
 }
 
 h2 {
-    font: 600 20px/1.3 'Source Sans Pro',sans-serif;
+    font: 600 20px/1.3 Source Sans Pro,sans-serif;
 }
 
 h3 {
-    font: 400 18px/1.3 'Source Sans Pro',sans-serif;
+    font: 400 18px/1.3 Source Sans Pro,sans-serif;
     margin-block-start: .75rem;
     margin-block-end: .75rem;
 }
@@ -45,39 +45,41 @@ a:hover {
     text-decoration: underline;
 }
 
-section {
-    padding: 1rem;
-}
-
 .form {
     width: 100%;
     padding: .5rem 1rem;
     margin: 0rem auto;
 }
 
-textarea {
+textarea, .input__orgname {
     font: inherit;
     outline: none;
     padding: 0.5rem 0.75rem;
     width: 100%;
-    border: 1px solid #BABCBE;
+    border-style: solid;
+    border-color: #BABCBE;
     border-radius: 4px;
+    border-width: 1px;
+}
+
+textarea {
     resize: vertical;
 }
 
-textarea:focus {
+textarea:focus, .input__orgname:focus {
     border-color: #5E33BF;
     border-width: 2px;
 }
 
-textarea::placeholder {
+textarea::placeholder, input::placeholder {
     color: #757575;
 }
 
 p {
-    margin: .5rem 0;
+    margin: .5rem 0 .5rem 0;
     font: 400 14px / 1.3 "Source Sans Pro", sans-serif;
     text-align: left;
+
 }
 
 button, .form__button {
@@ -109,6 +111,7 @@ button[value="validate"]:hover:not(:disabled) {
     background-color: #f2f2f2;
 }
 
+
 button[value="run"] {
     padding: .5rem 1.75rem;
 }
@@ -138,6 +141,18 @@ button[value="validate"]:disabled {
     justify-content: space-between
 }
 
+.search__header {
+    justify-content: space-between;
+}
+
+.search__error {
+    background-color: #FF000026;
+    padding: 15px;
+    margin-bottom: 15px;
+    margin-top: 0;
+    border-radius: 4px;
+}
+
 .form__input {
     font: inherit;
     margin: .325rem;
@@ -146,8 +161,15 @@ button[value="validate"]:disabled {
     padding: 0.5rem 0.75rem;
     height: 2.375rem;
     cursor: pointer;
-    border: 1px solid #BABCBE;
+    border-style: solid;
+    border-color: #BABCBE;
     border-radius: 4px;
+    border-width: 1px;
+}
+
+#load__file {
+    padding: .5rem .75rem;
+    width: 6rem;
 }
 
 input[type=file]::file-selector-button {
@@ -156,12 +178,125 @@ input[type=file]::file-selector-button {
     padding: 0 .5rem;
     background-color: #FFFFFF;
     color: #5E33BF;
-    border: 1px solid #5E33BF;
+    border-color: #5E33BF;
+    border-width: 1px;
     border-radius: 4px;
+    border-style: solid;
 }
 
 input[type=file]::file-selector-button:hover {
     background-color: #F2F2F2;
+}
+
+.graph_button_switchable {
+    background-color: #FFFFFF;
+    color: #5E33BF;
+    border-width: 1px;
+}
+
+.graph_button_switchable:hover {
+    background-color: #F2F2F2;
+}
+
+.plotly-graph-div {
+    height: 600px !important;
+}
+
+.search-content-wrapper, .table-wrapper {
+    background-color: #ffffff;
+    padding: 1.5625rem 1.875rem 1.875rem;
+    margin: 2rem auto 2rem auto;
+    font-family: "Source Sans Pro", Calibri, Arial, Helvetica, sans-serif !important;
+    box-sizing: border-box;
+    text-align: center;
+    box-shadow: 0 .02625rem .125rem #0000004d;
+}
+
+.search-content-wrapper {
+    min-width: 20rem;
+    max-width: 48rem;
+    border-radius: .3125rem;
+}
+
+.table-wrapper {
+    min-width: 30rem;
+    max-width: 84rem;
+    border-radius: 1rem;
+}
+
+.switch {
+    display: flex;
+    flex-direction: row;
+    cursor: pointer;
+}
+
+.switch__toggle {
+    position: relative;
+    left: 15px;
+    top: 2px;
+    width: 36px;
+    height: 14px;
+}
+
+.switch__toggle input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    border-radius: 34px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #00000061;
+    -webkit-transition: .3s;
+    transition: .3s;
+}
+
+.slider:before {
+    position: absolute;
+    border-radius: 50%;
+    top: -3px;
+    left: -2px;
+    content: "";
+    height: 20px;
+    width: 20px;
+    background-color: #F2F2F2;
+    -webkit-transition: .3s;
+    transition: .3s;
+}
+
+input:checked + .slider {
+    background-color: #5D33BF8a;
+}
+
+input:checked + .before {
+    background-color: #5D33BF;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+    background-color: #5D33BF;
+    -webkit-transform: translateX(20px);
+    -ms-transform: translateX(20px);
+    transform: translateX(20px);
+    -webkit-transform: background-color 1000ms linear;
+    -ms-transform: background-color 1000ms linear;
+    transform: background-color 1000ms linear;
+}
+
+.switch__label {
+    padding: 0rem 1.75rem 0.25rem;
+    font: 400 14px / 1.3 "Source Sans Pro", sans-serif;
+    letter-spacing: normal;
+    color: #000000;
 }
 
 .progress-container {
@@ -199,44 +334,22 @@ input[type=file]::file-selector-button:hover {
     pointer-events: none; /* click-through, optional */
 }
 
-.graph_button {
-    background-color: #FFFFFF;
-    color: #5E33BF;
-    border-width: 1px;
+.table {
+  width: 100%;
+  margin: 0 auto;
+  border-spacing: 0;
 }
 
-.graph_button:hover {
-    background-color: #F2F2F2;
+.table__cell {
+  padding: 1.25rem 1rem;
 }
 
-.graph_button--active {
-    background-color: #5E33BF;
-    border-color: #5E33BF;
-    color: #FFFFFF
+.table__cell--header {
+  text-align: left;
+  padding: 0.5rem 1rem;
+  border-bottom: 3px solid;
 }
 
-.plotly-graph-div {
-    height: 750px !important;
-}
-
-.search-content-wrapper, .plot-wrapper {
-    background-color: #ffffff;
-    margin: 2rem auto;
-    font-family: "Source Sans Pro", Calibri, Arial, Helvetica, sans-serif !important;
-    box-sizing: border-box;
-    text-align: center;
-    box-shadow: 0 .02625rem .125rem #0000004d;
-}
-
-.search-content-wrapper {
-    min-width: 20rem;
-    max-width: 48rem;
-    border-radius: .3125rem;
-}
-
-.plot-wrapper {
-    min-width: 30rem;
-    max-width: 84rem;
-    padding: 1.5625rem 1.875rem 1.875rem;
-    border-radius: 1rem;
+.table__recordUt {
+  font-weight: 400;
 }

@@ -4,7 +4,7 @@
 
 ## A Flask application with a simple graphical user interface to analyse and visualise the cited references data from Web of Science Core Collection. The application retrieves the data using Web of Science Expanded API.
 
-This application allows to analyse which journals, publishers, or author names were referenced by any Web of Science Core Collection dataset that you can define by an advanced search query (but not Cited Reference search). It retrieves cited references (and, for certain fields, full record metadata) using Web of Science Expanded API, visualises it in a variety of ways with Plotly package, and saves them into an Excel spreadsheet.
+This application allows to analyse which journals, publishers, or author names were referenced by any Web of Science Core Collection dataset that you can define by an advanced search query (but not Cited Reference search). It retrieves cited references (and, for certain fields, full record metadata) using Web of Science Expanded API, visualises it in a variety of ways with Plotly package, and saves them into a .csv file.
 
 #### How to use it
 Download the code, open the project folder where you saved it and create there a python file `apikeys.py`. There, you need to create a constant representing your Web of Science Expanded API key and pass its value as a string like in the example below:
@@ -33,11 +33,11 @@ And press the "Run" button. Please note that as Web of Science Expanded API has 
 
 The data retrieval should take quite some time. Because the /references endpoint of Web of Science Expanded API accepts individual Web of Science document IDs, it takes at least one API call to retrieve cited references for a single document, so if your dataset contains more than 100 Web of Science records, the data retrieval might take some time but the process can easily be run in the background. You can track the progress in your Python window or in the Run view of your IDE if you're launching the program from there. 
 
-When the data extraction is complete, the program will refresh the page and add the interactive visualisation plots with Plotly which you can switch between. It will also save an Excel file with all the metadata retrieved into a /downloads/ subfolder of the project folder.
+When the data extraction is complete, the program will refresh the page and add the interactive visualisation plots with Plotly which you can switch between. It will also save a .csv file with all the metadata retrieved into a /downloads/ subfolder of the project folder.
 
 ![Screenshot](screenshots/complete.png)
 
-You can also use the Load a Previously Saved Excel File form to visualise previously saved files.
+You can also use the Load a Previously Saved .csv File form to visualise previously saved files.
 
 These are some of the examples of the visualisations:
 

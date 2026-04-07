@@ -232,11 +232,13 @@ def fetch_abstract(item):
     :param item: dict.
     :return: str.
     """
-    if isinstance(item['abstracts'], list):
-        return [', '.join(a['abstract_text']['p']) for a in
-                item['abstracts']['abstract']]
-    if 'abstract' in item['abstracts'].keys():
-        return item['abstracts']['abstract']['abstract_text']['p']
+    if 'abstracts' in item:
+        if isinstance(item['abstracts'], list):
+            return [', '.join(a['abstract_text']['p']) for a in
+                    item['abstracts']['abstract']]
+        if 'abstract' in item['abstracts'].keys():
+            return item['abstracts']['abstract']['abstract_text']['p']
+        return ''
     return ''
 
 

@@ -1,5 +1,6 @@
 /*/*/apikey*.py
 /*/*/apikey*.R
+/*/*/apikey*.js
 /*/*/downloads/*
 /R/*/.RData
 /R/*/.RHistory
@@ -21,3 +22,4 @@
 /python/wos_to_vosviewer_exporter_flask/*.xlsx
 /python/*/downloads/*.xlsx
 .Rproj.user
+/javaScript/*/node_modules/

@@ -257,17 +257,21 @@ def retrieve_citing_policy_docs_ids(rec: dict) -> list[str]:
     belongs to Policy Citation Index database."""
 
     citing_data = citing_policy_docs_empty_query(rec)
-    citing_query_id = citing_data['QueryResult']['QueryID']
-    total_citing_records = citing_data['QueryResult']['RecordsFound']
-    citing_requests_required = ((total_citing_records - 1) // 100) + 1
-    citing_policy_docs_ids = []
-    for i in range(citing_requests_required):
-        citing_uts = citing_policy_ids_api_call(citing_query_id, 100*i+1)
-        for citing_ut in citing_uts:
-            if citing_ut.split(':')[0] == 'PCI':
-                citing_policy_docs_ids.append(citing_ut)
 
-    return citing_policy_docs_ids
+    if citing_data:
+        citing_query_id = citing_data['QueryResult']['QueryID']
+        total_citing_records = citing_data['QueryResult']['RecordsFound']
+        citing_requests_required = ((total_citing_records - 1) // 100) + 1
+        citing_policy_docs_ids = []
+        for i in range(citing_requests_required):
+            citing_uts = citing_policy_ids_api_call(citing_query_id, 100*i+1)
+            for citing_ut in citing_uts:
+                if citing_ut.split(':')[0] == 'PCI':
+                    citing_policy_docs_ids.append(citing_ut)
+
+        return citing_policy_docs_ids
+
+    return []
 
 
 def fetch_policy_docs_metadata(policy_doc: dict) -> dict:
